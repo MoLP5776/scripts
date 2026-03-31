@@ -121,19 +121,27 @@ Ich empfehle das Password in der docker-composer.yml auf etwas leichter merkbare
 ## DSAI Install Party
 Hier kann man der Install Party aus dem Skript [Franz Reichels](https://gitlab.com/reif1337/refr_dsai_script) folgen.
 
-### MiniConda installieren
-```bash
-mkdir -p ~/miniconda3
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
-bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-rm -rf ~/miniconda3/miniconda.sh
-~/miniconda3/bin/conda init bash
-# Terminal neu starten!
-```
-
 ### GraphViz
 ```bash
 sudo apt install -y graphviz
+```
+
+### MiniConda installieren
+```bash
+cd ~/Downloads
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+```
+
+```bash
+bash Miniconda3-latest-Linux-x86_64.sh
+```
+- Press 'Enter' to continue
+- Type 'yes'
+- Install location: leave empty for (/home/username/miniconda3)
+
+### Activate Conda
+```bash
+source ~/.bashrc
 ```
 
 ### Conda Environment "dsai" ohne NVIDIA
