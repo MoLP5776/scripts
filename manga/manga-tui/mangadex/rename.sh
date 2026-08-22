@@ -9,7 +9,7 @@ TRANSLATOR="anonymous"
 REMOVE_TRANSLATOR="_a_nonymous"  # What to REMOVE from original filenames
 HAS_TITLE=true        # Set to false if series has no chapter titles
 
-# Destination folder (edit for your setup)
+# Destination folder (edit for your HDD setup)
 DEST="/media/molp5776/E Festplatte A/Manga/Mairimashita! Iruma-kun"
 
 ###########################################
@@ -26,7 +26,7 @@ for f in *.cbz; do
     pre_uuid=$(echo "$base" | sed 's/ [a-f0-9]\{8\}-[a-f0-9]\{4\}-[a-f0-9]\{4\}-[a-f0-9]\{4\}-[a-f0-9]\{12\}$//')
 
     ###########################################
-    # Extract chapter with decimal support
+    # Extract chapter (supports decimals!)
     ###########################################
     chapter=$(echo "$pre_uuid" | grep -oP 'Ch[\. ]+\K[0-9]+(\.[0-9]+)?')
 

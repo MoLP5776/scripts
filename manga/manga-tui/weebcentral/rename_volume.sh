@@ -22,7 +22,7 @@ for f in *.cbz; do
     pre_uuid=$(echo "$base" | sed 's/ [A-Z0-9]\{12,40\}$//')
 
     ###########################################
-    # Extract chapter with decimal support
+    # Extract chapter (supports decimals!)
     ###########################################
     chapter=$(echo "$pre_uuid" | grep -oP 'Ch[\. ]+\K[0-9]+(\.[0-9]+)?')
 

@@ -4,8 +4,8 @@
 # USER SETTINGS
 ###########################################
 
-# WeebCentral never has a translator in its name
-# You can set one, but won't be included in filename
+# WeebCentral usually has no translator name in filename
+# You *can* set one, but won't be included in filename
 TRANSLATOR=""
 DEST="/media/molp5776/E Festplatte A/Manga/MARRIAGETOXIN"
 
@@ -19,11 +19,11 @@ for f in *.cbz; do
     original="$f"
     base="${f%.cbz}"
 
-    # Remove UUID
+    # Remove UUID (16+ uppercase alphanumeric)
     pre_uuid=$(echo "$base" | sed 's/ [A-Z0-9]\{16,40\}$//')
 
     ###########################################
-    # Extract chapter with decimal support
+    # Extract chapter (supports decimals!)
     ###########################################
     chapter=$(echo "$pre_uuid" | grep -oP 'Ch[\. ]+\K[0-9]+(\.[0-9]+)?')
 
