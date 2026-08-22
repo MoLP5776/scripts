@@ -5,6 +5,20 @@ sudo apt update && sudo apt upgrade
 sudo apt install curl wget gpg vlc unzip
 ```
 
+Zorin Appearance - Interface: Set Left Super Key to Zorin Menu
+
+# Taskbar
+Intellihide = on
+
+Intellihide settings:
+
+- Only hide the panel from windows = on
+- Touching monitor edge = on
+- Require pressure = on
+
+Display panels on all monitors = on
+
+
 # Necessities
 ## Zen Browser:
 ```bash
