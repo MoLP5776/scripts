@@ -1,8 +1,8 @@
 # Linux Move
 All in one essential command:
 ```bash
-sudo apt update && sudo apt upgrade
-sudo apt install curl wget gpg vlc unzip
+sudo apt update && sudo apt upgrade -y
+sudo apt install curl wget gpg vlc unzip git ffmpeg rclone libfuse2t64
 ```
 
 Zorin Appearance - Interface: Set Left Super Key to Zorin Menu
@@ -24,17 +24,18 @@ Display panels on all monitors = on
 ```bash
 flatpak install flathub app.zen_browser.zen
 ```
-IMPORTANT FOR MULTI-MONITOR SETUP: in about:config set "zen.window-sync enabled" to "false"
+IMPORTANT FOR MULTI-MONITOR SETUP: in about:config set the window-sync pref to `false`.
 
 ## AppImageLauncher
-The [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher) allows you to easily integrate AppImages
+The [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher) allows you to easily integrate AppImages.
+Download the `.deb` from the releases page first, then:
 ```bash
 cd ~/Downloads
 sudo apt install ./appimagelauncher-*.deb
 ```
 
 ## Spotify
-Just follow the commands, installs the .deb package of Spotify
+Just follow the commands, installs the .deb package of Spotify.
 ```bash
 curl -sS https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/spotify.gpg
 
@@ -43,19 +44,23 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 sudo apt update
 sudo apt install spotify-client
 ```
+> **Note:** Spotify rotates that pubkey filename occasionally. If the `curl` line 404s,
+> grab the current pubkey URL from Spotify's Debian repo page and swap it in.
 
-Here my patch-script for Spicetify.
+Here my patch-script for Spicetify:
 ```bash
 #!/bin/bash
-Spicetify reinstall/update..." curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh echo "Done!"
+echo "Spicetify reinstall/update..."
+curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
+echo "Done!"
 ```
 
-After this, one should run spicetify:
+After this, run spicetify:
 ```bash
 spicetify
 ```
 
-If errors occur, simply fix them
+If errors occur, simply fix the permissions:
 ```bash
 sudo chmod a+wr /usr/share/spotify
 sudo chmod a+wr /usr/share/spotify/Apps -R
@@ -69,16 +74,16 @@ spicetify backup apply
 If asked if the marketplace should be installed as well, answer "yes".
 
 ## Steam
-Get Steam from the [official Website](https://store.steampowered.com/about/)
+Get Steam from the [official Website](https://store.steampowered.com/about/).
 ```bash
 cd ~/Downloads
-sudo apt install steam_latest.deb
+sudo apt install ./steam_latest.deb
 ```
 
 ## Discord
 Try official .deb version first. If it doesn't work, use flathub.
 
-Patch with vencord command.
+Patch with the `vencord` command (alias below).
 
 ## QBitTorrent
 ```bash
@@ -87,7 +92,10 @@ sudo apt install qbittorrent
 ```
 
 ## Manga-TUI
-Download the 64-bit Linux archive adn extract it
+Download the 64-bit Linux archive and extract it.
+> **Note:** v0.10.0 is pinned below — check the
+> [releases page](https://github.com/josueBarretogit/manga-tui/releases) for a newer version
+> and update the URL/filename if needed.
 ```bash
 # Download the archive
 wget https://github.com/josueBarretogit/manga-tui/releases/download/v0.10.0/manga-tui-0.10.0-x86_64-unknown-linux-gnu.tar.gz
@@ -96,29 +104,30 @@ wget https://github.com/josueBarretogit/manga-tui/releases/download/v0.10.0/mang
 tar -xvf manga-tui-0.10.0-x86_64-unknown-linux-gnu.tar.gz
 ```
 
-Install to your system path
+Install to your system path (confirm the binary isn't inside an extracted subfolder first):
 ```bash
 sudo mv manga-tui /usr/local/bin/
 ```
 
-Clean up
+Clean up:
 ```bash
 rm manga-tui-0.10.0-x86_64-unknown-linux-gnu.tar.gz
 ```
 
-You can now run `manga-tui` to download manga
+You can now run `manga-tui` to download manga.
+
 ## Krita
-Get from the [official website](https://krita.org/en/download/) and run with AppImageLauncher. 
+Get from the [official website](https://krita.org/en/download/) and run with AppImageLauncher.
 
 ## Minecraft
-Best way to play Minecraft
+Best way to play Minecraft:
 ```bash
 flatpak install flathub org.prismlauncher.PrismLauncher
 ```
 
 
 ## JetBrains Toolbox
-Download .tar.gz file from the [JetBrains site](https://www.jetbrains.com/toolbox-app/).
+Download the .tar.gz file from the [JetBrains site](https://www.jetbrains.com/toolbox-app/).
 
 ```bash
 cd ~/Downloads
@@ -131,14 +140,14 @@ chmod +x jetbrains-toolbox
 ```
 
 ## EBooks
-I recommend Calibre for editing book metadata. As Ebup reader, I recommend [Google Books](https://play.google.com/books)
+I recommend Calibre for editing book metadata. As Epub reader, I recommend [Google Books](https://play.google.com/books).
 ```bash
 sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
 ```
 
 ## Docker
-Setup through following the guide on the [official website](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
-Or through pasting of this command:
+Setup by following the guide on the [official website](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository),
+or by pasting this command:
 ```bash
 # Add Docker's official GPG key:
 sudo apt update
@@ -162,14 +171,15 @@ Install newest version with this:
 ```bash
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
-Testing through running the **hello-world** images
+Test by running the **hello-world** image:
 ```bash
 sudo docker run hello-world
 ```
-Adding user to admin group to no longer write sudo:
+Add user to the docker group to no longer write sudo:
 ```bash
 sudo usermod -aG docker $USER
 ```
+> **Note:** log out and back in (or run `newgrp docker`) before the group change takes effect.
 
 ## Affinity for Linux
 Download from this [GitHub](https://github.com/ryzendew/Linux-Affinity-Installer) repository:
@@ -197,7 +207,7 @@ flatpak install flathub org.kde.kdenlive
 ```
 
 ## Resource Managers
-Either Resources or Mission Center
+Either Resources or Mission Center:
 ```bash
 flatpak install flathub net.nokyan.Resources
 ```
@@ -234,6 +244,8 @@ Get from the [GitHub repository](https://github.com/AzaharPlus/AzaharPlus) and i
 
 
 # bash aliases
+> **Before the sync aliases work:** run `rclone config` once to set up the `dropbox:` remote
+> (rclone itself is installed in the essentials line at the top).
 ```bash
 alias manga='cd ~/.local/share/manga-tui/mangaDownloads'
 alias mangadex='manga-tui'
